@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/vite.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mutual Docs API</title>
+  </head>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <body>
+    <redoc id="redoc-container"></redoc>
+    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+  </body>
+  <script>
+    Redoc.init("/docs/index.yaml", {
+      sortEnumValuesAlphabetically: true,
+      sortOperationsAlphabetically: true,
+      sortTagsAlphabetically: true,
+      jsonSampleExpandLevel: 3,
+      theme: {
+        logo: {
+          gutter: "10px",
+        },
+        rightPanel: {
+          servers: {
+            overlay: {
+              backgroundColor: "#fdf4df",
+            },
+            url: {
+              backgroundColor: "#f9f4ea",
+            },
+          },
+        },
+        sidebar: {
+          backgroundColor: "#071a3e",
+          textColor: "#fcf8ee",
+        },
+        typography: {
+          fontSize: "15px",
+          fontFamily: "Poppins, sans-serif !important",
+          code: {
+            fontSize: "15px",
+            fontFamily: "JetBrains Mono, monospace !important",
+          },
+        },
+        fab: {
+          backgroundColor: "#ffaa00",
+          color: "#fdf4df",
+        },
+      },
+    });
+  </script>
+</html>

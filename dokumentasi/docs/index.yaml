@@ -1,0 +1,21 @@
+openapi: 3.1.0
+info:
+  x-logo:
+    url: "http://mutualv2.lppmp.untad.ac.id/media/logos/logo-signin.png"
+    altText: Eco Sprint
+  license:
+    name: Private
+    url: https://ecosprint.my.id
+  title: Eco Sprint
+  version: 1.0.0
+servers:
+  - url: $domainRoot
+
+x-tagGroups:
+  - name: Resources
+    tags:
+      - User
+
+paths:
+  /v1/user:
+    $ref: user/index.yaml

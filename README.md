@@ -1,6 +1,8 @@
 # EcoSprint
 Lomba Proxmo
 
-- Repo Dokumentasi
-- Repo Frontend
-- Repo Backend
+- ## Repo Dokumentasi
+  
+- ## Repo Frontend
+  
+- ## Repo Backend
