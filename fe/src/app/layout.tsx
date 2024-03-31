@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Comic_Neue } from 'next/font/google';
 import './globals.css';
-import { Navbar } from '@/components/navbar/navbar';
 
 const comic = Comic_Neue({
   subsets: ['latin'],
@@ -21,7 +20,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${comic.className} min-h-screen flex flex-col`}>
-        <Navbar />
         {children}
       </body>
     </html>

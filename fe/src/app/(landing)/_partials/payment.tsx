@@ -25,7 +25,7 @@ const data = [
   },
 ];
 
-export const PaymentMethod = () => {
+export function PaymentMethod(){
   return (
     <section className="pb-10 mt-[-40px] md:py-10 flex justify-center items-center px-[2vw] md:px-[7vw] lg:px-[12vw]">
       <div className="md:pt-6 flex sm:max-w-[calc(1280px_+_3vw)] w-full flex-wrap justify-center items-center mx-auto h-40">

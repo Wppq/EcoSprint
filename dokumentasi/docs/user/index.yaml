@@ -1,141 +1,42 @@
-get:
-  security: 
-    - {}
-  operationId: get-user
-  tags: 
-    - User
-  summary: Get User
-  
-  responses:
-    200:
-      description: Contracts listed.
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - message
-            properties:
-              message:
-                type: string
-                example: Success.
-
-    401:
-      description: Unauthenticated.
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - message
-            properties:
-              message:
-                type: string
-                example: Unauthenticated.
-    
-    403:
-      description: Not enough privileges.
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - message
-            properties:
-              message:
-                type: string
-                example: Not enough privileges.
-
 post:
-  security: 
+  security:
     - {}
-  operationId: create-user
-  tags: 
+  operationId: auth-user
+  tags:
     - User
-  summary: Create user
-  requestBody: 
-    content: 
+  summary: User Login
+  requestBody:
+    content:
       application/json:
-        schema: 
+        schema:
           type: object
           required:
-            - name
-            - username
-            - password
             - email
-            - role 
-            - user
-            - fakultas
-            - cluster
+            - password
           properties:
-            name:
-              type: string
-              example: S1 teknik informatika
-            username:
-              type: string
-              example: s1teknikinformatika
-            password:
-              type: string
-              example: password
             email:
               type: string
-              example: teknikinformatika@gmail.com
-            role:
+              example: ecosprint@gmail.com
+            password:
               type: string
-              example: pusdit
-            user:
-              type: object
-              required: 
-                - id
-                - name
-              properties:
-                id:
-                  type: integer
-                  example: 1
-                name:
-                  type: string
-                  example: Budi
-            fakultas:
-              type: object
-              required: 
-                - id
-                - name
-              properties:
-                id:
-                  type: integer
-                  example: 1
-                name:
-                  type: string
-                  example: Teknik
-            cluster:
-              type: object
-              required: 
-                - id
-                - name
-              properties:
-                id:
-                  type: integer
-                  example: 1
-                name:
-                  type: string
-                  example: S1
+              example: passwordApaSaja
 
-  responses: 
-    201:
-      description: User created.
-      content: 
+  responses:
+    200:
+      description: Get access token.
+      content:
         application/json:
-          schema: 
+          schema:
             type: object
-            required: 
-              -  message
-            properties: 
+            required:
+              - message
+            properties:
               message:
                 type: string
-                example: Successfully user created.
-                
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c.
+
     401:
-      description: Unauthenticated.
+      description: Unauthorized.
       content:
         application/json:
           schema:
@@ -145,17 +46,4 @@ post:
             properties:
               message:
                 type: string
-                example: Unauthenticated.
-    
-    403:
-      description: Not enough privileges.
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - message
-            properties:
-              message:
-                type: string
-                example: Not enough privileges.
+                example: email or password are wrong.

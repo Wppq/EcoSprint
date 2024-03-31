@@ -1,15 +1,9 @@
 'use client';
 import cntl from 'cntl';
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdMenu, MdMenuOpen } from 'react-icons/md';
 import { NavLinks } from './_partials/nav-links';
-
-const pjs = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-});
 
 const styles = {
   navThinLink: `flex items-center transition-colors p-[2px] rounded-sm`,
@@ -17,9 +11,9 @@ const styles = {
     cntl`leading-none transition-all text-[10px] md:text-[11px] lg:text-xs text-[#757575] bg-[#FBFBFB] px-[5vw] md:px-[10vw] lg:px-[15vw] ${
       type === 'visible' ? cntl`` : cntl`invisible`
     }`,
-  navMain: `${pjs.className} text-[#1E1E1E] px-[5vw] md:px-[10vw] lg:px-[15vw]`,
+  navMain: `text-[#1E1E1E] px-[5vw] md:px-[10vw] lg:px-[15vw]`,
   navAll: (type: 'fixed' | 'hidden') =>
-    cntl`fixed top-0 z-30 flex flex-col w-full font-medium transition-transform shadow-[0_4px_8px_0px_rgba(0,0,0,0.1)] ${
+    cntl`fixed top-0 z-30 flex flex-col w-full font-medium transition-transform shadow-[0_4px_8px_0px_rgba(0,0,0,0.1)] hover:bg-gray-300 ${
       type === 'fixed'
         ? cntl`shadow-none`
         : cntl`-translate-y-9 md:-translate-y-[38px] lg:-translate-y-10`
@@ -72,8 +66,6 @@ export function Navbar() {
     };
   }, [onScroll]);
 
-  const currentPath = usePathname();
-
   return (
     <nav
       className={`${styles.navAll('fixed')}`}
@@ -85,20 +77,29 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20 mx-auto max-w-7xl">
           <div>
             <Link href="/">
-              <h2 className='text-2xl font-extrabold' >Eco Sprint</h2>
+              <h2 className="text-4xl font-extrabold">Eco Sprint</h2>
             </Link>
           </div>
           <div
             className="items-center hidden md:gap-1 lg:gap-2 md:flex"
             data-cy="desktop-nav"
           >
-            <NavLinks/>
+            <NavLinks />
           </div>
-          <Link
-            href={'/donate'} 
-            className='rounded-xl px-3 p-2 bg-black text-center hover:bg-gray-900 text-white md:text-base lg:text-lg font-semibold'>
-            Donate
-          </Link>
+          <div>
+            <Link
+              href={'/donate'}
+              className="rounded-xl px-3 p-2 bg-black text-center hover:bg-gray-900 text-white md:text-base lg:text-lg font-semibold"
+            >
+              Donate
+            </Link>
+            <Link
+              href={'/login'}
+              className="rounded-xl px-3 p-2 bg-eco text-center hover:bg-black hover:text-white md:text-base lg:text-lg font-semibold ml-2"
+            >
+              Login
+            </Link>
+          </div>
           <button
             className="flex items-center md:hidden"
             data-cy="hamburger"
@@ -111,7 +112,7 @@ export function Navbar() {
         </div>
       </div>
       <aside className={styles.navMobile(sidebarOpen)} data-cy="mobile-nav">
-        <NavLinks/>
+        <NavLinks />
       </aside>
     </nav>
   );

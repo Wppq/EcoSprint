@@ -28,7 +28,7 @@ const data = [
   },
 ];
 
-export const Reason = () => {
+export function Reason(){
   return (
     <section data-cy="scheduled-section">
       <svg width="100%" height="100%" id="svg" viewBox="0 50 1440 390">
@@ -47,7 +47,7 @@ export const Reason = () => {
           fillOpacity="1"
         ></path>
       </svg>
-      <div className="bg-gradient-to-b from-[#C1D937]  to-[#163B09] relative w-full py-1 mt-[-180px]">
+      <div className="bg-gradient-to-b from-[#C1D937]  to-[#245f0e] relative w-full py-1 mt-[-180px]">
         <div className="relative flex mx-auto overflow-hidden flex-col items-center justify-center w-full h-full sm:gap-12 gap-10 md:gap-[72px] py-10 my-10 px-10 md:px-10 lg:px-[100px] max-w-[1000px]">
           <h2 className="font-bold text-4xl">
             Mengapa Kita Harus Menanam Pohon?
@@ -89,12 +89,12 @@ export const Reason = () => {
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
-          fill="#163B09"
+          fill="#245f0e"
           fillOpacity="0.5"
           d="M0,64L26.7,90.7C53.3,117,107,171,160,181.3C213.3,192,267,160,320,170.7C373.3,181,427,235,480,224C533.3,213,587,139,640,133.3C693.3,128,747,192,800,192C853.3,192,907,128,960,112C1013.3,96,1067,128,1120,154.7C1173.3,181,1227,203,1280,192C1333.3,181,1387,139,1413,117.3L1440,96L1440,0L1413.3,0C1386.7,0,1333,0,1280,0C1226.7,0,1173,0,1120,0C1066.7,0,1013,0,960,0C906.7,0,853,0,800,0C746.7,0,693,0,640,0C586.7,0,533,0,480,0C426.7,0,373,0,320,0C266.7,0,213,0,160,0C106.7,0,53,0,27,0L0,0Z"
         ></path>
         <path
-          fill="#163B09"
+          fill="#245f0e"
           fillOpacity="1"
           d="M0,160L20,176C40,192,80,224,120,234.7C160,245,200,235,240,208C280,181,320,139,360,128C400,117,440,139,480,128C520,117,560,75,600,90.7C640,107,680,181,720,186.7C760,192,800,128,840,101.3C880,75,920,85,960,112C1000,139,1040,181,1080,186.7C1120,192,1160,160,1200,138.7C1240,117,1280,107,1320,112C1360,117,1400,139,1420,149.3L1440,160L1440,0L1420,0C1400,0,1360,0,1320,0C1280,0,1240,0,1200,0C1160,0,1120,0,1080,0C1040,0,1000,0,960,0C920,0,880,0,840,0C800,0,760,0,720,0C680,0,640,0,600,0C560,0,520,0,480,0C440,0,400,0,360,0C320,0,280,0,240,0C200,0,160,0,120,0C80,0,40,0,20,0L0,0Z"
         ></path>

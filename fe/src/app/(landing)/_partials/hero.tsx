@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { HeroLanding } from '@/../public/assets/img/heros';
 import Link from 'next/link';
 
-export const Hero = () => {
+export function Hero(){
   return (
     <section className="relative">
       <Image

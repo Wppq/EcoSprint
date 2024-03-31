@@ -1,8 +1,5 @@
 openapi: 3.1.0
 info:
-  x-logo:
-    url: "http://mutualv2.lppmp.untad.ac.id/media/logos/logo-signin.png"
-    altText: Eco Sprint
   license:
     name: Private
     url: https://ecosprint.my.id
@@ -15,7 +12,13 @@ x-tagGroups:
   - name: Resources
     tags:
       - User
+      - Donation
 
 paths:
   /v1/user:
     $ref: user/index.yaml
+  /v1/user/register:
+    $ref: user/regiterUser.yaml 
+    
+  /v1/donation:
+    $ref: donation/index.yaml
