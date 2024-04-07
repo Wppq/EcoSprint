@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdMenu, MdMenuOpen } from 'react-icons/md';
 import { NavLinks } from './_partials/nav-links';
+import { Logo } from '@/../public/assets/img/logos';
+import Image from 'next/image';
 
 const styles = {
   navThinLink: `flex items-center transition-colors p-[2px] rounded-sm`,
@@ -13,7 +15,7 @@ const styles = {
     }`,
   navMain: `text-[#1E1E1E] px-[5vw] md:px-[10vw] lg:px-[15vw]`,
   navAll: (type: 'fixed' | 'hidden') =>
-    cntl`fixed top-0 z-30 flex flex-col w-full font-medium transition-transform shadow-[0_4px_8px_0px_rgba(0,0,0,0.1)] hover:bg-gray-300 ${
+    cntl`fixed top-0 z-30 flex flex-col w-full font-medium transition-transform shadow-[0_4px_8px_0px_rgba(0,0,0,0.1)] bg-white ${
       type === 'fixed'
         ? cntl`shadow-none`
         : cntl`-translate-y-9 md:-translate-y-[38px] lg:-translate-y-10`
@@ -28,6 +30,7 @@ export function Navbar() {
   const navAll = useRef<HTMLDivElement>(null);
   const navSlim = useRef<HTMLDivElement>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [auth, setAuth] = useState(false);
   const onScroll = useCallback(handleNavbarScroll, [sidebarOpen]);
   function handleNavbarScroll() {
     const { scrollY } = window;
@@ -60,6 +63,7 @@ export function Navbar() {
   }
   useEffect(() => {
     onScroll();
+    localStorage.getItem('token') == null ? setAuth(false) : setAuth(true);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', onScroll);
@@ -77,7 +81,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20 mx-auto max-w-7xl">
           <div>
             <Link href="/">
-              <h2 className="text-4xl font-extrabold">Eco Sprint</h2>
+              <Image src={Logo} width={200} height={200} />
             </Link>
           </div>
           <div
@@ -93,12 +97,21 @@ export function Navbar() {
             >
               Donate
             </Link>
-            <Link
-              href={'/login'}
-              className="rounded-xl px-3 p-2 bg-eco text-center hover:bg-black hover:text-white md:text-base lg:text-lg font-semibold ml-2"
-            >
-              Login
-            </Link>
+            {auth ? (
+              <Link
+                href={'/dashboard'}
+                className="rounded-xl px-3 p-2 bg-eco text-center hover:bg-black hover:text-white md:text-base lg:text-lg font-semibold ml-2"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                href={'/login'}
+                className="rounded-xl px-3 p-2 bg-eco text-center hover:bg-black hover:text-white md:text-base lg:text-lg font-semibold ml-2"
+              >
+                Login
+              </Link>
+            )}
           </div>
           <button
             className="flex items-center md:hidden"

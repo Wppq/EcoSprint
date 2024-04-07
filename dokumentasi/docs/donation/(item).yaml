@@ -1,0 +1,66 @@
+get:
+  security:
+    - {}
+  operationId: donation
+  tags:
+    - Donation
+  summary: Get Donation
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: ulid
+
+  responses:
+    200:
+      description: Get donation.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id
+              - title
+              - description
+              - exp_date
+              - collected_trees
+              - tree_required
+              - image
+            properties:
+              id:
+                type: string
+                format: uuid
+                example: 01h4v193cbsqf516fhrjss2xzd
+              title:
+                type: string
+                example: Bantu taman yang tergerus agar menjadi lebih baik
+              description:
+                type: string
+                example: Taman yang telah tergerus akibat bencana alam akan di perbaiki dengan melakukan penanaman pohon berkala.
+              exp_date:
+                type: string
+                example: 11 apr 2024
+              collected_trees:
+                type: integer
+                example: 10
+              tree_required:
+                type: integer
+                example: 100
+              image:
+                type: string
+                example: http://localhost:3000/img/01h4v193cbsqf516fhrjss2xzd
+
+    404:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: not found.

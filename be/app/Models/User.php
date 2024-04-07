@@ -40,5 +40,9 @@ class User extends Authenticatable
             $model->id = Str::uuid();
         });
     }
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }
 

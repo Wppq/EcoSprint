@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donation;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class DonationController extends Controller
@@ -28,7 +29,12 @@ class DonationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $donation = Donation::findOrFail($id);
+            return response()->json($donation);
+        } catch (ModelNotFoundException $exception) {
+            return response()->json(['error' => 'Donation not found'], 404);
+        }
     }
 
     /**

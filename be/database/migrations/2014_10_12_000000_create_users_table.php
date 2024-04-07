@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('address');
             $table->string('phone');
-            $table->enum('role', ['admin', 'pm', 'user']);
+            $table->enum('role', ['admin', 'user']);
             $table->timestamps();
         });
     }

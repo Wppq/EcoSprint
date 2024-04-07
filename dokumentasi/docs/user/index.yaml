@@ -1,3 +1,49 @@
+get:
+  security:
+    - AUTHORIZATION: ["access_token:token"]
+  operationId: get-user
+  tags:
+    - User
+  summary: Get User
+
+  responses:
+    200:
+      description: Get user.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - username
+              - address
+              - phone
+            properties:
+              name:
+                type: string
+                example: Achmad
+              username:
+                type: string
+                example: Sarwidad
+              address:
+                type: string
+                example: jl. untad 1 kecamatan mantikulore kota palu sulawesi tengah
+              phone:
+                type: string
+                example: 0878667788543
+    401:
+      description: Unauthenticated.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthenticated.
+
 post:
   security:
     - {}

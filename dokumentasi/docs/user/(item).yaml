@@ -1,10 +1,10 @@
-post:
+put:
   security:
-    - {}
-  operationId: register-user
+    - AUTHORIZATION: ["access_token:token"]
+  operationId: user
   tags:
     - User
-  summary: Register user
+  summary: Update User Data
   requestBody:
     content:
       application/json:
@@ -13,8 +13,6 @@ post:
           required:
             - name
             - username
-            - password
-            - email
             - address
             - phone
           properties:
@@ -24,12 +22,6 @@ post:
             username:
               type: string
               example: Sarwidad
-            password:
-              type: string
-              example: passwordApaSaja
-            email:
-              type: string
-              example: ecosprint@gmail.com
             address:
               type: string
               example: jl. untad 1 kecamatan mantikulore kota palu sulawesi tengah
@@ -39,7 +31,7 @@ post:
 
   responses:
     201:
-      description: User registered.
+      description: User updated.
       content:
         application/json:
           schema:
@@ -49,7 +41,33 @@ post:
             properties:
               message:
                 type: string
-                example: Successfully user registered.
+                example: Successfully user updated.
+
+    401:
+      description: Unauthenticated.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthenticated.
+
+    403:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthorized.
 
     422:
       description: Invalid input.

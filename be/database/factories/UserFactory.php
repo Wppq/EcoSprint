@@ -22,7 +22,6 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $roles = ['user', 'admin', 'pm'];
 
         return [
             'name' => $this->faker->name,
@@ -31,7 +30,7 @@ class UserFactory extends Factory
             'password' => Hash::make('password'),
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
-            'role' => $this->faker->randomElement($roles),
+            'role' => $this->faker->randomElement(['user', 'admin']),
         ];
     }
 }

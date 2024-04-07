@@ -1,0 +1,66 @@
+get:
+  security:
+    - AUTHORIZATION: ["access_token:token"]
+  operationId: history-list
+  tags:
+    - History
+  summary: Get List Of History
+
+  responses:
+    200:
+      description: Get list of history.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - id
+                - type
+                - title
+                - score
+                - status
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  example: 01h4v193cbsqf516fhrjss2xzd
+                type:
+                  type: string
+                  example: Volunteer
+                title:
+                  type: string
+                  example: Bantu taman yang tergerus agar menjadi lebih baik
+                score:
+                  type: integer
+                  example: 2
+                status:
+                  type: string
+                  example: selesai
+
+    401:
+      description: Unauthenticated.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthenticated.
+
+    403:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthorized.

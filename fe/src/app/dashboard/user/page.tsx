@@ -1,89 +1,106 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Profile } from './_partials/profil';
+import { History } from './_partials/history';
+import { useRouter } from 'next/navigation';
+import { MdOutlineAccessTime, MdOutlineCampaign } from 'react-icons/md';
+import { CgProfile, CgLogOut } from 'react-icons/cg';
+import { LiaDonateSolid } from 'react-icons/lia';
+import { Campaign } from './_partials/campaign';
+import { Transaction } from './_partials/transaction';
 
 export function UserDashboard() {
-  const [activeMenu, setActiveMenu] = useState('home');
+  const router = useRouter();
+  const [activeMenu, setActiveMenu] = useState('');
+
+  useEffect(() => {}, []);
 
   const renderContent = () => {
     switch (activeMenu) {
       case 'home':
-        return <h1>Home</h1>;
+        return <History />;
       case 'profile':
         return <Profile />;
-      case 'settings':
-        return <h1>Settings</h1>;
-      case 'messages':
-        return <h1>Message</h1>;
-      case 'notifications':
-        return <h1>Notification</h1>;
+      case 'campaign':
+        return <Campaign />;
+      case 'transaction':
+        return <Transaction />;
       default:
-        return <h1>Home</h1>;
+        return <History />;
     }
   };
 
+  const logout = () => {
+    localStorage.clear();
+    router.push('/');
+  };
+
   return (
-    <div className="flex">
-      <div className="w-1/4 bg-gray-200 h-screen">
-        <div className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Dashboard Menu</h2>
-          <ul className="space-y-2">
-            <li>
-              <div
-                className={`block py-2 px-4 rounded-md ${
-                  activeMenu === 'home' ? 'bg-blue-500' : 'text-gray-800'
-                } hover:bg-blue-600 hover:cursor-pointer`}
-                onClick={() => setActiveMenu('home')}
-              >
-                Home
-              </div>
-            </li>
-            <li>
-              <div
-                className={`block py-2 px-4 rounded-md${
-                  activeMenu === 'profile' ? 'bg-blue-500 ' : 'text-gray-800'
-                } hover:bg-blue-600 hover:cursor-pointer`}
-                onClick={() => setActiveMenu('profile')}
-              >
-                Profile
-              </div>
-            </li>
-            <li>
-              <div
-                className={`block py-2 px-4 rounded-md${
-                  activeMenu === 'settings' ? 'bg-blue-500 ' : 'text-gray-800'
-                } hover:bg-blue-600 hover:cursor-pointer`}
-                onClick={() => setActiveMenu('settings')}
-              >
-                Settings
-              </div>
-            </li>
-            <li>
-              <div
-                className={`block py-2 px-4 rounded-md${
-                  activeMenu === 'messages' ? 'bg-blue-500 ' : 'text-gray-800'
-                } hover:bg-blue-600 hover:cursor-pointer`}
-                onClick={() => setActiveMenu('messages')}
-              >
-                Messages
-              </div>
-            </li>
-            <li>
-              <div
-                className={`block py-2 px-4 rounded-md${
-                  activeMenu === 'notifications'
-                    ? 'bg-blue-500 '
-                    : 'text-gray-800'
-                } hover:bg-blue-600 hover:cursor-pointer`}
-                onClick={() => setActiveMenu('notifications')}
-              >
-                Notifications
-              </div>
-            </li>
-          </ul>
+    <div className="flex px-40 h-screen">
+      <div className="w-1/4 h-screen overflow-hidden">
+        <div className="mt-40 rounded-xl">
+          <div className="p-4">
+            <ul className="space-y-2">
+              <li>
+                <div
+                  className={`py-2 px-4 rounded-md flex ${
+                    activeMenu === 'home' ? 'bg-eco' : 'text-gray-800'
+                  } hover:bg-eco hover:cursor-pointer`}
+                  onClick={() => setActiveMenu('home')}
+                >
+                  <MdOutlineAccessTime className="w-6 h-6 mr-2" />
+                  Riwayat
+                </div>
+              </li>
+              <li>
+                <div
+                  className={`py-2 px-4 rounded-md flex ${
+                    activeMenu === 'profile' ? 'bg-eco ' : 'text-gray-800'
+                  } hover:bg-eco hover:cursor-pointer`}
+                  onClick={() => setActiveMenu('profile')}
+                >
+                  <CgProfile className="w-6 h-6 mr-2" />
+                  Profile
+                </div>
+              </li>
+              <li>
+                <div
+                  className={`py-2 px-4 rounded-md flex ${
+                    activeMenu === 'campaign' ? 'bg-eco ' : 'text-gray-800'
+                  } hover:bg-eco hover:cursor-pointer`}
+                  onClick={() => setActiveMenu('campaign')}
+                >
+                  <MdOutlineCampaign className="w-6 h-6 mr-2" />
+                  Kampanye
+                </div>
+              </li>
+              <li>
+                <div
+                  className={`py-2 px-4 rounded-md flex ${
+                    activeMenu === 'transaction' ? 'bg-eco ' : 'text-gray-800'
+                  } hover:bg-eco hover:cursor-pointer`}
+                  onClick={() => setActiveMenu('transaction')}
+                >
+                  <LiaDonateSolid className="w-6 h-6 mr-2" />
+                  Transaksi
+                </div>
+              </li>
+              <li>
+                <div
+                  className={`py-2 px-4 rounded-md flex ${
+                    activeMenu === 'notifications' ? 'bg-eco ' : 'text-gray-800'
+                  } hover:bg-eco hover:cursor-pointer`}
+                  onClick={() => logout()}
+                >
+                  <CgLogOut className="w-6 h-6 mr-2" />
+                  logout
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div className="w-3/4 bg-gray-100 h-screen">{renderContent()}</div>
+      <div className="w-3/4 h-screen p-10 bg-eco/20 overflow-auto">{renderContent()}</div>
     </div>
   );
 }

@@ -29,20 +29,19 @@ class LoginTest extends TestCase
     public function test_login_with_valid_data()
     {
         User::factory()->create([
-            "email" => "ecosprint@mail.com",
+            "email" => "ecosprint2@mail.com",
             "password" => "apaSajaPass",
         ]);
+
         $response = $this->postJson('/api/login', [
-            "email" => "ecosprint@mail.com",
+            "email" => "ecosprint2@mail.com",
             "password" => "apaSajaPass"
         ]);
 
         $response->assertStatus(200)
             ->assertJsonStructure([
-                'message' => [
-                    'token',
-                    'role'
-                ]
+                'token',
+                'role'
             ]);
     }
 

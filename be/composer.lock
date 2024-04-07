@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fed063f752dc29b9157e5dac8f46387d",
+    "content-hash": "c3720c7d66b832a05e60ee0c9c45fbc4",
     "packages": [
         {
             "name": "brick/math",
@@ -503,16 +503,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.10.0",
+            "version": "v6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "a49db6f0a5033aef5143295342f1c95521b075ff"
+                "reference": "e94e7353302b0c11ec3cfff7180cd0b1743975d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/a49db6f0a5033aef5143295342f1c95521b075ff",
-                "reference": "a49db6f0a5033aef5143295342f1c95521b075ff",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/e94e7353302b0c11ec3cfff7180cd0b1743975d2",
+                "reference": "e94e7353302b0c11ec3cfff7180cd0b1743975d2",
                 "shasum": ""
             },
             "require": {
@@ -560,9 +560,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.10.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.5.0"
             },
-            "time": "2023-12-01T16:26:39+00:00"
+            "time": "2023-05-12T15:47:07+00:00"
         },
         {
             "name": "fruitcake/php-cors",

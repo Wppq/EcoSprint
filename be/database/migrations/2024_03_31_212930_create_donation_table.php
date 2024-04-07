@@ -14,10 +14,14 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description');
-            $table->date('exp_date');
+            $table->text('blog');
+            $table->string('status');
+            $table->string('location');
+            $table->date('date_line');
             $table->integer('collected_trees');
             $table->integer('tree_required');
             $table->string('image');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +31,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('donations');
+        Schema::table('donations', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
     }
 };

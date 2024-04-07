@@ -22,7 +22,7 @@ export function FormLogin() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         'http://localhost:8000/api/login',
         formData,
         {
@@ -31,8 +31,7 @@ export function FormLogin() {
           },
         },
       );
-      if (response.status === 200) {
-        const data = response.data.message;
+      if (data.token) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
         router.push('/dashboard');

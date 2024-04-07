@@ -29,4 +29,8 @@ class Donation extends Model
             $model->id = Str::uuid();
         });
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

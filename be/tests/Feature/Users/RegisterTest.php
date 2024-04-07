@@ -26,7 +26,7 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-    public function testRegistrationWithValidData()
+    public function test_registration_with_valid_data()
     {
         $response = $this->postJson('/api/register', [
             'name' => 'John Doe',
@@ -49,7 +49,7 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-    public function testRegistrationWithInvalidData()
+    public function test_registration_with_invalid_data()
     {
         $response = $this->postJson('/api/register', [
             "name" => "Achmad"

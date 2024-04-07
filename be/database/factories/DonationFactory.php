@@ -20,12 +20,16 @@ class DonationFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(),
-            'exp_date' => $this->faker->date(),
-            'collected_trees' => $this->faker->numberBetween(0, 50),
-            'tree_required' => $this->faker->numberBetween(50, 100),
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'blog' => $this->faker->text,
+            'status' => $this->faker->randomElement(['finished', 'pandding']),
+            'location' => $this->faker->address,
+            'date_line' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+            'collected_trees' => $this->faker->numberBetween(0, 1000),
+            'tree_required' => $this->faker->numberBetween(0, 1000),
             'image' => $this->faker->imageUrl(),
+            'user_id' => $this->faker->uuid(),
         ];
     }
 }
