@@ -3,6 +3,7 @@
 namespace Tests\Feature\Donation;
 
 use App\Models\Donation;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -26,7 +27,9 @@ class GetDonationTest extends TestCase
      */
     public function test_get_donation_by_id(): void
     {
-        $donations = Donation::factory()->count(2)->create();
+        $donations = Donation::factory()->count(2)->create([
+            'user_id' => User::factory()->create()->id,
+        ]);
         $response = $this->get('/api/donation/' . $donations[0]->id);
         $response
             ->assertStatus(200)
@@ -34,16 +37,22 @@ class GetDonationTest extends TestCase
                 "id",
                 "title",
                 "description",
-                "exp_date",
-                "collected_trees",
-                "tree_required",
-                "image"
+                'blog',
+                'status',
+                'location',
+                'date_line',
+                'collected_trees',
+                'tree_required',
+                'image',
+                'user_id',
             ]);
     }
 
     public function test_get_donation_not_found(): void
     {
-        $donations = Donation::factory()->count(2)->create();
+        $donations = Donation::factory()->count(2)->create([
+            'user_id' => User::factory()->create()->id,
+        ]);
         $response = $this->get('/api/donation/' . $donations[0]->id . "aa");
         $response
             ->assertStatus(404)

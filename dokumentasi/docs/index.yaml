@@ -15,6 +15,7 @@ x-tagGroups:
       - Donation
       - History
       - Transaction
+      - Volunteer
 
 paths:
   /v1/user:
@@ -34,6 +35,9 @@ paths:
     
   /v1/transaction:
     $ref: transaction/index.yaml
+    
+  /v1/volunteer:
+    $ref: volunteer/index.yaml
 
 components:
   securitySchemes:

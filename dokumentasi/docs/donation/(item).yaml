@@ -63,4 +63,4 @@ get:
             properties:
               message:
                 type: string
-                example: not found.
+                example: Donation not found.

@@ -94,9 +94,8 @@ class UserController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $token = $request->bearerToken();
-        $decode = JwtHelper::decodeToken($token);
-        $user = User::where('id', $decode->id)->first();
+        $userId = $request['auth_id'];
+        $user = User::where('id', $userId)->first();
         $user->update([
             'name' => $request->json('name'),
             'username' => $request->json('username'),

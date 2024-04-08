@@ -9,7 +9,6 @@ export default function Donation() {
   const [donations, setDonations] = useState<DonationInterface[]>([]);
 
   useEffect(() => {
-    // Fetch donation data from API
     const fetchDonations = async () => {
       try {
         const response = await axios.get<DonationInterface[]>('http://localhost:8000/api/donation');

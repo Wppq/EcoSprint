@@ -8,11 +8,14 @@ import axios from 'axios';
 import Image from 'next/image';
 import { formatDate } from '@/helpers/date';
 import { HiOutlineShare } from 'react-icons/hi';
+import { useRouter } from 'next/navigation';
+import { PopupVolunteer } from './_partials/popupVolunteer';
 
 export default function DonateDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState<Donation | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showPopupVolunteer, setShowPopupVolunteer] = useState<Boolean>(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -41,9 +44,25 @@ export default function DonateDetails() {
     return <h1>Loading</h1>;
   }
 
+  const handlePopUpVolunteer = () => {
+    setShowPopupVolunteer(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopupVolunteer(false);
+  };
+
   return (
     <section>
       <Navbar />
+      {showPopupVolunteer && (
+        <PopupVolunteer
+          handleClosePopup={handleClosePopup}
+          setShowPopup={setShowPopupVolunteer}
+          id ={product.id}
+        />
+      )}
+
       <div className="container mx-auto py-8 mt-20">
         <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
@@ -73,9 +92,7 @@ export default function DonateDetails() {
                   </div>
                   <p className="text-lg font-semibold">Budi</p>
                 </div>
-                <p className="text-gray-700">
-                  {product.blog}
-                </p>
+                <p className="text-gray-700">{product.blog}</p>
               </div>
               <div className="w-80 border-l-2 pl-2 space-y-4">
                 <div>
@@ -93,7 +110,8 @@ export default function DonateDetails() {
                 </div>
                 <div>
                   <h2>
-                    Batas tanggal donasi : <br /> {formatDate(product.date_line)}
+                    Batas tanggal donasi : <br />{' '}
+                    {formatDate(product.date_line)}
                   </h2>
                 </div>
                 {/* <div>
@@ -156,12 +174,12 @@ export default function DonateDetails() {
                 <HiOutlineShare className="w-6 h-6 mr-2" />
                 {copied ? 'Copied!' : 'Share'}
               </button>
-              <Link
-                href={'/volunteer'}
+              <button
                 className="rounded-lg px-20 p-2 bg-black text-center  text-white md:text-base lg:text-lg font-semibold"
+                onClick={handlePopUpVolunteer}
               >
                 Gabung Aksi
-              </Link>
+              </button>
               <Link
                 href={'/donate'}
                 className="rounded-lg px-20 p-2 bg-black text-center  text-white md:text-base lg:text-lg font-semibold"

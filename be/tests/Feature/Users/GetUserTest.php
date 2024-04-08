@@ -24,7 +24,7 @@ class GetUserTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_get_user()
+    public function test_get_user_success()
     {
         User::factory()->create([
             "email" => "ecosprint1@mail.com",

@@ -100,7 +100,7 @@ export function UserDashboard() {
           </div>
         </div>
       </div>
-      <div className="w-3/4 h-screen p-10 bg-eco/20 overflow-auto">{renderContent()}</div>
+      <div className="w-3/4 h-screen p-10 bg-eco/10 overflow-y-auto">{renderContent()}</div>
     </div>
   );
 }

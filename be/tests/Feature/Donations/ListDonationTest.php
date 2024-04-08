@@ -3,6 +3,7 @@
 namespace Tests\Feature\Donation;
 
 use App\Models\Donation;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -26,7 +27,9 @@ class ListDonationTest extends TestCase
      */
     public function test_get_list_donation(): void
     {
-        Donation::factory()->count(2)->create();
+        Donation::factory()->count(2)->create([
+            'user_id' => User::factory()->create()->id,
+        ]);
         $response = $this->get('/api/donation');
 
         $response
@@ -36,10 +39,14 @@ class ListDonationTest extends TestCase
                     "id",
                     "title",
                     "description",
-                    "exp_date",
-                    "collected_trees",
-                    "tree_required",
-                    "image"
+                    'blog',
+                    'status',
+                    'location',
+                    'date_line',
+                    'collected_trees',
+                    'tree_required',
+                    'image',
+                    'user_id',
                 ]
             ]);
     }

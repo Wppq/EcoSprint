@@ -6,26 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Donation extends Model
+class History extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        "id",
-        "title",
-        "description",
-        'blog',
-        'status',
-        'location',
-        'date_line',
-        'collected_trees',
-        'tree_required',
-        'image',
-        'user_id',
-    ];
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'history';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+
+    protected $fillable = ['id', 'user_id', 'type', 'title', 'score', 'status'];
     protected $primaryKey = 'id';
-    public $incrementing = false;
     protected static function boot()
     {
         parent::boot();
@@ -34,6 +33,9 @@ class Donation extends Model
             $model->id = Str::uuid();
         });
     }
+    /**
+     * Get the user that owns the history.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -1,0 +1,58 @@
+post:
+  security:
+    - AUTHORIZATION: ["access_token:token"]
+  operationId: create-volunteer
+  tags:
+    - Volunteer
+  summary: Volunteer created
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: 01h4v193cbsqf516fhrjss2xzd
+
+  responses:
+    201:
+      description: Voleteer created
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Successfully joined the activity as a volunteer
+    401:
+      description: Unauthenticated.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthenticated.
+
+    404:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Donation not found.

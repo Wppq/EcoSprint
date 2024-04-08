@@ -19,6 +19,8 @@ class DonationFactory extends Factory
 
     public function definition()
     {
+        $treeRequired = $this->faker->numberBetween(15, 1000);
+        $collectedTrees = $this->faker->numberBetween(0, $treeRequired);
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
@@ -26,8 +28,8 @@ class DonationFactory extends Factory
             'status' => $this->faker->randomElement(['finished', 'pandding']),
             'location' => $this->faker->address,
             'date_line' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
-            'collected_trees' => $this->faker->numberBetween(0, 1000),
-            'tree_required' => $this->faker->numberBetween(0, 1000),
+            'collected_trees' => $collectedTrees,
+            'tree_required' => $treeRequired,
             'image' => $this->faker->imageUrl(),
             'user_id' => $this->faker->uuid(),
         ];
