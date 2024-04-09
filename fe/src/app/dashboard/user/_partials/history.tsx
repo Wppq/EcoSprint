@@ -55,11 +55,11 @@ export function History() {
               </div>
               <div className="w-1/6 text-start">
                 {history.status == 'selesai' ? (
-                  <p className="text-green-500">{history.score}</p>
+                  <p className="text-green-500">+{history.score}</p>
                 ) : history.status == 'pending' ? (
-                  <p className="text-yellow-500">{history.score}</p>
+                  <p className="text-yellow-500">0</p>
                 ) : (
-                  <p className="text-red-500">{history.score}</p>
+                  <p className="text-red-500">-{history.score}</p>
                 )}
               </div>
               <div>

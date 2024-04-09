@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\JwtHelper;
 use App\Models\User;
-use Firebase\JWT\JWT;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,7 +40,8 @@ class UserController extends Controller
         if (password_verify($request->json('password'), $user->password)) {
             $token = JwtHelper::generateToken([
                 'id' => $user->id,
-                'email' => $user->email
+                'email' => $user->email,
+                'role' => $user->role
             ]);
             return response()->json([
                 'token' => $token,

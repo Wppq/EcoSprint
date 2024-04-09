@@ -10,12 +10,14 @@ import { formatDate } from '@/helpers/date';
 import { HiOutlineShare } from 'react-icons/hi';
 import { useRouter } from 'next/navigation';
 import { PopupVolunteer } from './_partials/popupVolunteer';
+import { PopupDonation } from './_partials/popupDonation';
 
 export default function DonateDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState<Donation | null>(null);
   const [copied, setCopied] = useState(false);
   const [showPopupVolunteer, setShowPopupVolunteer] = useState<Boolean>(false);
+  const [showPopupDonation, setShowPopupDonation] = useState<Boolean>(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -44,12 +46,20 @@ export default function DonateDetails() {
     return <h1>Loading</h1>;
   }
 
-  const handlePopUpVolunteer = () => {
+  const handlePopupVolunteer = () => {
     setShowPopupVolunteer(true);
   };
 
-  const handleClosePopup = () => {
+  const handleClosePopupVolunteer = () => {
     setShowPopupVolunteer(false);
+  };
+
+  const handlePopupDonation = () => {
+    setShowPopupDonation(true);
+  };
+
+  const handleClosePopupDonation = () => {
+    setShowPopupDonation(false);
   };
 
   return (
@@ -57,9 +67,17 @@ export default function DonateDetails() {
       <Navbar />
       {showPopupVolunteer && (
         <PopupVolunteer
-          handleClosePopup={handleClosePopup}
+          handleClosePopup={handleClosePopupVolunteer}
           setShowPopup={setShowPopupVolunteer}
-          id ={product.id}
+          id={product.id}
+        />
+      )}
+
+      {showPopupDonation && (
+        <PopupDonation
+          handleClosePopup={handleClosePopupDonation}
+          setShowPopup={setShowPopupDonation}
+          id={product.id}
         />
       )}
 
@@ -176,16 +194,16 @@ export default function DonateDetails() {
               </button>
               <button
                 className="rounded-lg px-20 p-2 bg-black text-center  text-white md:text-base lg:text-lg font-semibold"
-                onClick={handlePopUpVolunteer}
+                onClick={handlePopupVolunteer}
               >
                 Gabung Aksi
               </button>
-              <Link
-                href={'/donate'}
+              <button
                 className="rounded-lg px-20 p-2 bg-black text-center  text-white md:text-base lg:text-lg font-semibold"
+                onClick={handlePopupDonation}
               >
                 Donasi
-              </Link>
+              </button>
             </div>
           </div>
         </div>

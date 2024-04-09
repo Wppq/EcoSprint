@@ -17,6 +17,7 @@ class CheckAuthorizationHeader
                 return response()->json(['error' => 'Unauthenticated.'], 401);
             }
             $request['auth_id'] = $decode->id;
+            $request['auth_role'] = $decode->role;
             return $next($request);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Unauthenticated.'], 401);

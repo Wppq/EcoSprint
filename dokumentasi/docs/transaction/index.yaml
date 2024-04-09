@@ -19,7 +19,7 @@ get:
                 - id
                 - title
                 - status
-                - nominal
+                - amount
               properties:
                 id:
                   type: string
@@ -31,9 +31,68 @@ get:
                 status:
                   type: string
                   example: selesai
-                nominal:
+                amount:
                   type: string
                   example: "20.000"
+
+    401:
+      description: Unauthenticated.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthenticated.
+
+    403:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Unauthorized.
+
+post:
+  security:
+    - AUTHORIZATION: ["access_token:token"]
+  operationId: create-trasaction
+  tags:
+    - Transaction
+  summary: Create Transaction
+
+  responses:
+    201:
+      description: Create Transaction.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - donation_id
+                - amount
+                - payment_method
+              properties:
+                donation_id:
+                  type: string
+                  format: uuid
+                  example: 01h4v193cbsqf516fhrjss2xzd
+                amount:
+                  type: string
+                  example: 20000
+                payment_method:
+                  type: string
+                  example: BNI
 
     401:
       description: Unauthenticated.

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
 use Illuminate\Http\Request;
@@ -25,7 +27,14 @@ Route::group(['middleware' => 'cors'], function () {
         Route::post('/volunteer', [VolunteerController::class, 'create']);
 
         Route::get('/history', [HistoryController::class, 'index']);
+
+        Route::post('/transaction', [TransactionController::class, 'create']);
+        Route::get('/transaction', [TransactionController::class, 'index']);
+        Route::patch('/transaction/{id}', [TransactionController::class, 'update']);
+        Route::post('/transaction/{id}', [TransactionController::class, 'uploadProof']);
+
     });
+    Route::get('/image/{image_path}', [ImageController::class, 'show']);
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/register', [UserController::class, 'register']);
 

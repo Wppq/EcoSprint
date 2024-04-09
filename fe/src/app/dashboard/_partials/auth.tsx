@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import AdminDashboard from '../admin/page';
+import { AdminDashboard } from '../admin/page';
 import { UserDashboard } from '../user/page';
 
 interface AuthProps {
