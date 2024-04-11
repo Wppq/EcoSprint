@@ -1,0 +1,61 @@
+get:
+  security:
+    - {}
+  operationId: donation-list
+  tags:
+    - Donation
+  summary: Get List Of Donation
+
+  responses:
+    200:
+      description: Get list of donation.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - id
+                - title
+                - description
+                - exp_date
+                - collected_trees
+                - tree_required
+                - image
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  example: 01h4v193cbsqf516fhrjss2xzd
+                title:
+                  type: string
+                  example: Bantu taman yang tergerus agar menjadi lebih baik
+                description:
+                  type: string
+                  example: Taman yang telah tergerus akibat bencana alam akan di perbaiki dengan melakukan penanaman pohon berkala.
+                exp_date:
+                  type: string
+                  example: 11 apr 2024
+                collected_trees:
+                  type: integer
+                  example: 10
+                tree_required:
+                  type: integer
+                  example: 100
+                image:
+                  type: string
+                  example: http://localhost:3000/img/01h4v193cbsqf516fhrjss2xzd
+
+    401:
+      description: Unauthenticated..
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: email or password are wrong.

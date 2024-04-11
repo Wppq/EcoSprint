@@ -1,0 +1,37 @@
+get:
+  security:
+    - {}
+  operationId: rank-list
+  tags:
+    - Rank
+  summary: Get List Of Rank
+
+  responses:
+    200:
+      description: Get list of rank.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - id
+                - username
+                - image
+                - score
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  example: 01h4v193cbsqf516fhrjss2xzd
+                username:
+                  type: string
+                  example: Achmad
+                score:
+                  type: integer
+                  example: 100
+                image:
+                  type: string
+                  example: http://localhost:3000/img/01h4v193cbsqf516fhrjss2xzd
+

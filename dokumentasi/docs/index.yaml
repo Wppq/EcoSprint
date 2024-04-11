@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  license:
+    name: Private
+    url: https://ecosprint.my.id
+  title: Eco Sprint
+  version: 1.0.0
+servers:
+  - url: $domainRoot
+
+x-tagGroups:
+  - name: Resources
+    tags:
+      - User
+      - Donation
+      - History
+      - Transaction
+      - Volunteer
+      - Rank
+
+paths:
+  /v1/user:
+    $ref: user/index.yaml
+  /v1/user/register:
+    $ref: user/regiterUser.yaml
+  /v1/user/update:
+    $ref: user/(item).yaml
+
+  /v1/donation:
+    $ref: donation/index.yaml
+  /v1/donation/{id}:
+    $ref: donation/(item).yaml
+    
+  /v1/history:
+    $ref: history/index.yaml
+    
+  /v1/transaction:
+    $ref: transaction/index.yaml
+  /v1/transaction/{id}:
+    $ref: transaction/(item).yaml
+    
+  /v1/volunteer:
+    $ref: volunteer/index.yaml
+    
+  /v1/rank:
+    $ref: rank/index.yaml
+
+components:
+  securitySchemes:
+    AUTHORIZATION:
+      type: http
+      scheme: bearer
+      description: Bearer authorization.

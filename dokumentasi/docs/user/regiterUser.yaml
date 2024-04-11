@@ -1,0 +1,74 @@
+post:
+  security:
+    - {}
+  operationId: register-user
+  tags:
+    - User
+  summary: Register user
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - username
+            - password
+            - email
+            - address
+            - phone
+          properties:
+            name:
+              type: string
+              example: Achmad
+            username:
+              type: string
+              example: Sarwidad
+            password:
+              type: string
+              example: passwordApaSaja
+            email:
+              type: string
+              example: ecosprint@gmail.com
+            address:
+              type: string
+              example: jl. untad 1 kecamatan mantikulore kota palu sulawesi tengah
+            phone:
+              type: string
+              example: 0878667788543
+
+  responses:
+    201:
+      description: User registered.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: Successfully user registered.
+
+    422:
+      description: Invalid input.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - errors
+            properties:
+              message:
+                type: string
+                example: The given data was invalid.
+              errors:
+                type: object
+                properties:
+                  name:
+                    type: array
+                    items:
+                      type: string
+                      example: name is required.
