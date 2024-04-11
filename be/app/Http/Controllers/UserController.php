@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\JwtHelper;
+use App\Models\Rank;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -54,30 +55,34 @@ class UserController extends Controller
 
     public function Register(Request $request)
     {
-        $validator = Validator::make($request->json()->all(), [
-            'name' => 'required|string|max:50|min:3',
-            'username' => 'required|string|max:50|min:4',
-            'password' => 'required|string|min:6',
-            'email' => 'required|string|email|max:100',
-            'address' => 'required|string|max:255',
-            'phone' => 'required|string|max:13',
-        ]);
+        try {
+            $validator = Validator::make($request->json()->all(), [
+                'name' => 'required|string|max:50|min:3',
+                'username' => 'required|string|max:50|min:4',
+                'password' => 'required|string|min:6',
+                'email' => 'required|string|email|max:100',
+                'address' => 'required|string|max:255',
+                'phone' => 'required|string|max:13',
+            ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $user = new User();
+            $user->name = $request->json('name');
+            $user->username = $request->json('username');
+            $user->password = $request->json('password');
+            $user->email = $request->json('email');
+            $user->address = $request->json('address');
+            $user->phone = $request->json('phone');
+            $user->role = "user";
+            $user->save();
+
+            return response()->json(['message' => "success create account"], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'something make it happen'], 500);
         }
-
-        $user = new User();
-        $user->name = $request->json('name');
-        $user->username = $request->json('username');
-        $user->password = $request->json('password');
-        $user->email = $request->json('email');
-        $user->address = $request->json('address');
-        $user->phone = $request->json('phone');
-        $user->role = "user";
-        $user->save();
-
-        return response()->json(['message' => "success create account"], 201);
     }
 
     public function update(Request $request)

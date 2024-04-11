@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\History;
+use App\Models\Rank;
 use App\Models\Transaction;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class TransactionController extends Controller
 {
@@ -18,6 +20,7 @@ class TransactionController extends Controller
                 $transactions = DB::table('transactions')
                     ->join('donations', 'transactions.donation_id', '=', 'donations.id')
                     ->where('transactions.user_id', $request['auth_id'])
+                    ->orderBy('transactions.updated_at', 'desc')
                     ->select('transactions.*', 'donations.title')
                     ->get();
 
@@ -94,11 +97,26 @@ class TransactionController extends Controller
                     'score' => $transaction->amount / 20000,
                     'status' => 'selesai',
                 ]);
+                Donation::updateOrCreate(
+                    [
+                        'id' => $transaction->donation->id
+                    ],
+                    [
+                        'collected_trees' => DB::raw("collected_trees + " . ($transaction->amount / 20000))
+                    ]
+                );
+                Rank::updateOrCreate(
+                    [
+                        'user_id' => $transaction->user_id
+                    ],
+                    [
+                        'score' => DB::raw("score + " . ($transaction->amount / 20000))
+                    ]
+                );
             }
 
             return response()->json(['message' => 'Successfully transaction status updated.'], 200);
         } catch (\Throwable $th) {
-            dd($th);
             return response()->json(['message' => 'something make it happen'], 500);
         }
     }

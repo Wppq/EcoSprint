@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->integer('collected_trees');
             $table->integer('tree_required');
             $table->string('image');
-            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,9 +30,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('donations', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('donations');
     }
 };

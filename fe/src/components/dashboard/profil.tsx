@@ -52,7 +52,7 @@ export function Profile() {
           config,
         );
         setIsEditing(false);
-        Router.router?.reload
+        Router.router?.reload;
       } catch (error) {
         console.error(error);
       }
@@ -172,21 +172,76 @@ export function Profile() {
         </div>
       ) : (
         <div>
-          <div className="mb-4">
-            <p className="text-gray-700 font-medium">Name:</p>
-            <p className="text-gray-600">{userData.name}</p>
+          <div className="flex space-x-2">
+            <div className="mb-4 w-1/2">
+              <label htmlFor="name" className=" text-gray-700 font-medium mb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={userData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Enter your name"
+                readOnly
+              />
+            </div>
+            <div className="mb-4 w-1/2">
+              <label
+                htmlFor="username"
+                className=" text-gray-700 font-medium mb-1"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={userData.username}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Enter your username"
+                readOnly
+              />
+            </div>
           </div>
           <div className="mb-4">
-            <p className="text-gray-700 font-medium">Username:</p>
-            <p className="text-gray-600">{userData.username}</p>
+            <label
+              htmlFor="address"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Address
+            </label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={userData.address}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter your address"
+              readOnly
+            />
           </div>
           <div className="mb-4">
-            <p className="text-gray-700 font-medium">Address:</p>
-            <p className="text-gray-600">{userData.address}</p>
-          </div>
-          <div className="mb-4">
-            <p className="text-gray-700 font-medium">Phone:</p>
-            <p className="text-gray-600">{userData.phone}</p>
+            <label
+              htmlFor="phone"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Phone
+            </label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value={userData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Enter your phone number"
+              readOnly
+            />
           </div>
           <div className="flex justify-center pt-4">
             <button

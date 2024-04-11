@@ -1,5 +1,9 @@
+'use client';
 import { PlanttingContent } from '@/../public/assets/img/content';
 import Image from 'next/image';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const data = [
   {
@@ -28,7 +32,13 @@ const data = [
   },
 ];
 
-export function Reason(){
+export function Reason() {
+  const settings = {
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <section data-cy="scheduled-section">
       <svg width="100%" height="100%" id="svg" viewBox="0 50 1440 390">
@@ -41,7 +51,7 @@ export function Reason(){
         ></path>
         <path
           d="M0,160L60,176C120,192,240,224,360,224C480,224,600,192,720,197.3C840,203,960,245,1080,245.3C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-          stroke="none" 
+          stroke="none"
           strokeWidth="0"
           fill="#C1D937"
           fillOpacity="1"
@@ -52,38 +62,28 @@ export function Reason(){
           <h2 className="font-bold text-4xl">
             Mengapa Kita Harus Menanam Pohon?
           </h2>
-          <div className="flex flex-col gap-14 w-[90%]">
-            {data.map((item, index) =>
-              index % 2 == 0 ? (
-                <div className="flex flex-col-reverse items-center md:flex-row">
-                  <Image
-                    data-cy="planting-img"
-                    src={item.image}
-                    className="w-[45%] rounded-md"
-                    alt="Tree Planting"
-                  />
-                  <div className="flex flex-col items-center gap-4 md:items-start pl-8">
-                    <p className="text-base text-center md:text-lg md:text-start">
-                      {item.description}
-                    </p>
+          <div className="w-full">
+            <Slider {...settings}>
+              {data.map((item, index) => {
+                return (
+                  <div className="px-20" key={index}>
+                    <div className="flex flex-col items-center justify-center md:flex-row">
+                      <div className="flex flex-col items-center gap-4 md:items-start pr-8">
+                        <p className="text-base text-center md:text-lg md:text-start">
+                          {item.description}
+                        </p>
+                      </div>
+                      <Image
+                        data-cy="planting-img"
+                        src={item.image}
+                        className="w-[45%] rounded-md"
+                        alt="Tree Planting"
+                      />
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center justify-center md:flex-row">
-                  <div className="flex flex-col items-center gap-4 md:items-start pr-8">
-                    <p className="text-base text-center md:text-lg md:text-start">
-                      {item.description}
-                    </p>
-                  </div>
-                  <Image
-                    data-cy="planting-img"
-                    src={item.image}
-                    className="w-[45%] rounded-md"
-                    alt="Tree Planting"
-                  />
-                </div>
-              ),
-            )}
+                );
+              })}
+            </Slider>
           </div>
         </div>
       </div>
@@ -101,4 +101,4 @@ export function Reason(){
       </svg>
     </section>
   );
-};
+}

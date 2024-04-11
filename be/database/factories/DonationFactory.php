@@ -25,13 +25,12 @@ class DonationFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'blog' => $this->faker->text,
-            'status' => $this->faker->randomElement(['finished', 'pandding']),
+            'status' => 'pending',
             'location' => $this->faker->address,
             'date_line' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
             'collected_trees' => $collectedTrees,
             'tree_required' => $treeRequired,
             'image' => $this->faker->imageUrl(),
-            'user_id' => $this->faker->uuid(),
         ];
     }
 }

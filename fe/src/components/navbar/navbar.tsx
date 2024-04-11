@@ -81,7 +81,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20 mx-auto max-w-7xl">
           <div>
             <Link href="/">
-              <Image src={Logo} width={200} height={200} alt={''} />
+              <Image className="h-36" src={Logo} width={200} height={200} alt={''} />
             </Link>
           </div>
           <div

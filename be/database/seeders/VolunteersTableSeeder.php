@@ -13,6 +13,6 @@ class VolunteersTableSeeder extends Seeder
      */
     public function run()
     {
-        Volunteer::factory(3)->create();
+        
     }
 }

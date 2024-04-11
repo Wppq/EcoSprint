@@ -86,7 +86,7 @@ export default function DonateDetails() {
           <div className="p-4">
             <Image
               className="w-full h-96 object-cover rounded-lg"
-              src={product.image}
+              src={`http://localhost:8000/images/${product.image}`}
               alt={product.title}
               width={500}
               height={500}
@@ -102,7 +102,7 @@ export default function DonateDetails() {
                   <div className="flex-shrink-0 mr-4">
                     <Image
                       className="rounded-full h-14 w-14"
-                      src={product.image}
+                      src={`http://localhost:8000/images/${product.image}`}
                       alt={product.title}
                       width={100}
                       height={100}
@@ -154,33 +154,6 @@ export default function DonateDetails() {
                     ></div>
                   </div>
                 </div>
-                <div className="flex">
-                  <p>Donatur terkini</p>
-                  <p className="px-1">|</p>
-                  <p>Donatur teratas</p>
-                </div>
-                <div className="w-full h-80 border-2 overflow-auto space-y-2 p-2 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent">
-                  {[1, 2, 3, 4, 5].map(() => (
-                    <div className="bg-gray-200 p-2">
-                      <div className="flex items-center w-full py-4 pb-6">
-                        <div className="flex-shrink-0 mr-4">
-                          <Image
-                            className="rounded-full h-6 w-6"
-                            src={product.image}
-                            alt={product.title}
-                            width={100}
-                            height={100}
-                          />
-                        </div>
-                        <p className="text-sm font-semibold">Budi</p>
-                      </div>
-                      <p className="text-xs">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Quod obcaecati quidem eveniet.
-                      </p>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
 
@@ -196,13 +169,13 @@ export default function DonateDetails() {
                 className="rounded-lg px-20 p-2 bg-black text-center  text-white md:text-base lg:text-lg font-semibold"
                 onClick={handlePopupVolunteer}
               >
-                Gabung Aksi
+                Volunteer
               </button>
               <button
                 className="rounded-lg px-20 p-2 bg-black text-center  text-white md:text-base lg:text-lg font-semibold"
                 onClick={handlePopupDonation}
               >
-                Donasi
+                Donation
               </button>
             </div>
           </div>

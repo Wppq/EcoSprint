@@ -12,7 +12,7 @@ export function CardDonation({ donate }: CardDonationProps) {
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-2xl hover:border-2">
       <Image
         className="w-full h-60 object-cover p-2 rounded-3xl"
-        src={donate.image}
+        src={`http://localhost:8000/images/${donate.image}`}
         alt={donate.title}
         draggable={false}
         width={220}

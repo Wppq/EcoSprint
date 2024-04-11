@@ -21,7 +21,6 @@ class Donation extends Model
         'collected_trees',
         'tree_required',
         'image',
-        'user_id',
     ];
 
     protected $primaryKey = 'id';
@@ -33,9 +32,5 @@ class Donation extends Model
         static::creating(function ($model) {
             $model->id = Str::uuid();
         });
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

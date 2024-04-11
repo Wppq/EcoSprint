@@ -1,28 +1,28 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { History } from '../user/_partials/history';
 import { MdOutlineAccessTime } from 'react-icons/md';
 import { CgProfile, CgLogOut } from 'react-icons/cg';
 import { LiaDonateSolid } from 'react-icons/lia';
-import { Profile } from './_partials/profile';
 import { Transaction } from './_partials/transaction';
+import { Navbar } from '@/components/navbar/navbar';
+import { Profile } from '@/components/dashboard/profil';
 
 export function AdminDashboard() {
   const router = useRouter();
-  const [activeMenu, setActiveMenu] = useState('home');
-
-  useEffect(() => {}, []);
+  const [activeMenu, setActiveMenu] = useState('');
 
   const renderContent = () => {
     switch (activeMenu) {
       case 'profile':
-        return <Profile/>;
-      case 'home':
-        return <h1>World</h1>;
+        return <Profile />;
+      case 'history':
+        return <History />;
       case 'transaction':
-        return <Transaction/>;
+        return <Transaction />;
       default:
-        return <h1>Hello</h1>;
+        return <Profile />;
     }
   };
 
@@ -32,62 +32,67 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="flex px-40 h-screen">
-      <div className="w-1/4 h-screen overflow-hidden">
-        <div className="mt-40 rounded-xl">
-          <div className="p-4">
-            <ul className="space-y-2">
-              <li>
-                <div
-                  className={`py-2 px-4 rounded-md flex ${
-                    activeMenu === 'home' ? 'bg-eco' : 'text-gray-800'
-                  } hover:bg-eco hover:cursor-pointer`}
-                  onClick={() => setActiveMenu('home')}
-                >
-                  <MdOutlineAccessTime className="w-6 h-6 mr-2" />
-                  Riwayat
-                </div>
-              </li>
-              <li>
-                <div
-                  className={`py-2 px-4 rounded-md flex ${
-                    activeMenu === 'profile' ? 'bg-eco ' : 'text-gray-800'
-                  } hover:bg-eco hover:cursor-pointer`}
-                  onClick={() => setActiveMenu('profile')}
-                >
-                  <CgProfile className="w-6 h-6 mr-2" />
-                  Profile
-                </div>
-              </li>
-              <li>
-                <div
-                  className={`py-2 px-4 rounded-md flex ${
-                    activeMenu === 'transaction' ? 'bg-eco ' : 'text-gray-800'
-                  } hover:bg-eco hover:cursor-pointer`}
-                  onClick={() => setActiveMenu('transaction')}
-                >
-                  <LiaDonateSolid className="w-6 h-6 mr-2" />
-                  Transaksi
-                </div>
-              </li>
-              <li>
-                <div
-                  className={`py-2 px-4 rounded-md flex ${
-                    activeMenu === 'notifications' ? 'bg-eco ' : 'text-gray-800'
-                  } hover:bg-eco hover:cursor-pointer`}
-                  onClick={() => logout()}
-                >
-                  <CgLogOut className="w-6 h-6 mr-2" />
-                  logout
-                </div>
-              </li>
-            </ul>
+    <>
+      <Navbar />
+      <div className="flex px-40 h-screen">
+        <div className="w-1/4 mt-20">
+          <div className="rounded-xl">
+            <div className="p-4">
+              <ul className="space-y-2">
+                <li>
+                  <div
+                    className={`py-2 px-4 rounded-md flex ${
+                      activeMenu === 'profile' ? 'bg-eco ' : 'text-gray-800'
+                    } hover:bg-eco hover:cursor-pointer`}
+                    onClick={() => setActiveMenu('profile')}
+                  >
+                    <CgProfile className="w-6 h-6 mr-2" />
+                    Profile
+                  </div>
+                </li>
+                <li>
+                  <div
+                    className={`py-2 px-4 rounded-md flex ${
+                      activeMenu === 'transaction' ? 'bg-eco ' : 'text-gray-800'
+                    } hover:bg-eco hover:cursor-pointer`}
+                    onClick={() => setActiveMenu('transaction')}
+                  >
+                    <LiaDonateSolid className="w-6 h-6 mr-2" />
+                    Transaction
+                  </div>
+                </li>
+                <li>
+                  <div
+                    className={`py-2 px-4 rounded-md flex ${
+                      activeMenu === 'history' ? 'bg-eco' : 'text-gray-800'
+                    } hover:bg-eco hover:cursor-pointer`}
+                    onClick={() => setActiveMenu('history')}
+                  >
+                    <MdOutlineAccessTime className="w-6 h-6 mr-2" />
+                    History
+                  </div>
+                </li>
+                <li>
+                  <div
+                    className={`py-2 px-4 rounded-md flex ${
+                      activeMenu === 'notifications'
+                        ? 'bg-eco '
+                        : 'text-gray-800'
+                    } hover:bg-eco hover:cursor-pointer`}
+                    onClick={() => logout()}
+                  >
+                    <CgLogOut className="w-6 h-6 mr-2" />
+                    Logout
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+        <div className="w-3/4 h-screen p-10 overflow-y-auto pt-36">
+          {renderContent()}
+        </div>
       </div>
-      <div className="w-3/4 h-screen p-10 bg-eco/10 overflow-y-auto">
-        {renderContent()}
-      </div>
-    </div>
+    </>
   );
 }
