@@ -9,26 +9,28 @@ import { Transaction } from './_partials/transaction';
 import { Navbar } from '@/components/navbar/navbar';
 import { Profile } from '@/components/dashboard/profil';
 
-export function UserDashboard() {
+export default function UserDashboard() {
   const router = useRouter();
   const [activeMenu, setActiveMenu] = useState('');
 
   const renderContent = () => {
     switch (activeMenu) {
       case 'profile':
-        return <Profile/>
+        return <Profile />;
       case 'history':
         return <History />;
       case 'transaction':
         return <Transaction />;
       default:
-        return <Profile/>
+        return <Profile />;
     }
   };
 
   const logout = () => {
-    localStorage.clear();
-    router.push('/');
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      router.push('/');
+    }
   };
 
   return (

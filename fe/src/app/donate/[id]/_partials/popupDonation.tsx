@@ -1,4 +1,5 @@
 'use client';
+import { showErrorAlert } from '@/components/alert/alert';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -61,7 +62,7 @@ export function PopupDonation({
       },config);
       router.back();
     } catch (error) {
-      console.error('Error confirming payment:', error);
+      await showErrorAlert(error);
     }
   };
 

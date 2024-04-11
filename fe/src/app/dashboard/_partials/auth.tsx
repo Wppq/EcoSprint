@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
-import { AdminDashboard } from '../admin/page';
-import { UserDashboard } from '../user/page';
+import AdminDashboard from '../admin/page';
+import UserDashboard from '../user/page';
 
 interface AuthProps {
   role: string | null;
@@ -13,7 +13,9 @@ export function Auth({ role }: AuthProps) {
   } else if (role === 'user') {
     return <UserDashboard />;
   } else {
-    localStorage.clear();
-    router.push('/login');
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      router.push('/login');
+    }
   }
 }

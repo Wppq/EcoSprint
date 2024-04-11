@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Payment } from '@/models/payment';
+import { useRouter } from 'next/navigation';
+import { showErrorAlert } from '@/components/alert/alert';
 
 interface UploadPopupProps {
   paymentId: string;
@@ -11,6 +13,7 @@ interface UploadPopupProps {
 const UploadPopup: React.FC<UploadPopupProps> = ({ paymentId, onClose }) => {
   const [image, setImage] = useState<File | null>(null);
   const [sender, setSender] = useState<string>('');
+  const router = useRouter()
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -25,6 +28,14 @@ const UploadPopup: React.FC<UploadPopupProps> = ({ paymentId, onClose }) => {
   const handleUpload = async () => {
     if (!image || !sender) return;
     try {
+      let token = null;
+      if (typeof window !== 'undefined') {
+        token = localStorage.getItem('token');
+      }
+        if (!token) {
+          router.push('/login');
+          return;
+        }
       const formData = new FormData();
       formData.append('image', image);
       formData.append('sender', sender);
@@ -32,7 +43,7 @@ const UploadPopup: React.FC<UploadPopupProps> = ({ paymentId, onClose }) => {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
@@ -44,8 +55,7 @@ const UploadPopup: React.FC<UploadPopupProps> = ({ paymentId, onClose }) => {
       alert('Image uploaded successfully');
       onClose();
     } catch (error) {
-      console.error('Error uploading image:', error);
-      alert('Failed to upload image');
+      await showErrorAlert(error);
     }
   };
 
@@ -92,13 +102,22 @@ export function Transaction() {
   const [selectedPaymentId, setSelectedPaymentId] = useState<string | null>(
     null,
   );
+  const router = useRouter()
 
   useEffect(() => {
     const fetchPayments = async () => {
       try {
+        let token = null;
+      if (typeof window !== 'undefined') {
+        token = localStorage.getItem('token');
+      }
+        if (!token) {
+          router.push('/login');
+          return;
+        }
         const config = {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
           },
         };
         const { data } = await axios.get(
@@ -107,7 +126,7 @@ export function Transaction() {
         );
         setPayments(data);
       } catch (error) {
-        console.error(error);
+        await showErrorAlert(error);
       }
     };
 

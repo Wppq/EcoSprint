@@ -11,6 +11,7 @@ import { HiOutlineShare } from 'react-icons/hi';
 import { useRouter } from 'next/navigation';
 import { PopupVolunteer } from './_partials/popupVolunteer';
 import { PopupDonation } from './_partials/popupDonation';
+import { showErrorAlert } from '@/components/alert/alert';
 
 export default function DonateDetails() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ export default function DonateDetails() {
         );
         setProduct(response.data);
       } catch (error) {
-        console.error('Error fetching product:', error);
+        await showErrorAlert(error);
       }
     };
 
@@ -102,7 +103,7 @@ export default function DonateDetails() {
                   <div className="flex-shrink-0 mr-4">
                     <Image
                       className="rounded-full h-14 w-14"
-                      src={`http://localhost:8000/images/${product.image}`}
+                      src={`http://localhost:8000/api/image/27470334_7309681.jpg`}
                       alt={product.title}
                       width={100}
                       height={100}

@@ -2,15 +2,26 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { History as HistoryModel } from '@/models/history';
+import { useRouter } from 'next/navigation';
+import { showErrorAlert } from '@/components/alert/alert';
 
 export function History() {
   const [histories, setHistories] = useState<HistoryModel[]>([]);
+  const router = useRouter()
   useEffect(() => {
     const fetchHistories = async () => {
       try {
+        let token = null;
+      if (typeof window !== 'undefined') {
+        token = localStorage.getItem('token');
+      }
+        if (!token) {
+          router.push('/login');
+          return;
+        }
         const config = {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
           },
         };
         const { data } = await axios.get(
@@ -19,7 +30,7 @@ export function History() {
         );
         setHistories(data);
       } catch (error) {
-        console.error(error);
+        await showErrorAlert(error);
       }
     };
 

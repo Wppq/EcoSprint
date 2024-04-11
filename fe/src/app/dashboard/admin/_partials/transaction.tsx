@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Payment } from '@/models/payment';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { showErrorAlert } from '@/components/alert/alert';
 
 export function Transaction() {
   const [payments, setPayments] = useState<Payment[]>([]);
@@ -13,9 +14,17 @@ export function Transaction() {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
+        let token = null;
+        if (typeof window !== 'undefined') {
+          token = localStorage.getItem('token');
+        }
+        if (!token) {
+          router.push('/login');
+          return;
+        }
         const config = {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
           },
         };
         const { data } = await axios.get(
@@ -24,10 +33,9 @@ export function Transaction() {
         );
         setPayments(data);
       } catch (error) {
-        console.error(error);
+        await showErrorAlert(error);
       }
     };
-
     fetchPayments();
   }, []);
 
@@ -37,14 +45,22 @@ export function Transaction() {
 
   const handleCloseImage = () => {
     setSelectedPayment(null);
-    router.push('/dashboard')
+    router.push('/dashboard');
   };
 
   const changeStatus = async (status: string, id: string) => {
     try {
+      let token = null;
+      if (typeof window !== 'undefined') {
+        token = localStorage.getItem('token');
+      }
+      if (!token) {
+        router.push('/login');
+        return;
+      }
       const config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.patch(
@@ -55,7 +71,7 @@ export function Transaction() {
         config,
       );
     } catch (error) {
-      console.error(error);
+      await showErrorAlert(error);
     }
   };
 

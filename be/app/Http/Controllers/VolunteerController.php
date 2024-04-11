@@ -12,6 +12,9 @@ class VolunteerController extends Controller
     public function create(Request $request)
     {
         try {
+            if ($request['auth_role'] != "user") {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
             $userId = $request['auth_id'];
             $donationFound = Donation::where('id', $request->json('id'))->first();
             if (!$donationFound) {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { showErrorAlert } from '@/components/alert/alert';
 
 export function FormLogin() {
   const router = useRouter();
@@ -31,15 +32,15 @@ export function FormLogin() {
           },
         },
       );
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('role', data.role);
-        router.push('/dashboard');
-      } else {
-        console.error('Login failed');
+      if (typeof localStorage !== 'undefined') {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('role', data.role);
+          router.push('/dashboard');
+        }
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      await showErrorAlert(error);
     }
   };
 

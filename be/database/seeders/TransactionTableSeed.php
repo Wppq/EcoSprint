@@ -17,7 +17,7 @@ class TransactionTableSeed extends Seeder
     {
         $users = User::all();
         $donations = Donation::all();
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $user = $users->random();
             $donation = $donations->random();
             if ($user->role !== "admin") {

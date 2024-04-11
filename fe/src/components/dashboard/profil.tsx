@@ -3,10 +3,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
+import { showErrorAlert } from '../alert/alert';
 
 export function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'));
   const [userData, setUserData] = useState({
     name: '',
     username: '',
@@ -17,6 +17,10 @@ export function Profile() {
   useEffect(() => {
     const fertchUserData = async () => {
       try {
+        let token = null;
+        if (typeof window !== 'undefined') {
+          token = localStorage.getItem('token');
+        }
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -28,7 +32,10 @@ export function Profile() {
         );
         setUserData(data);
       } catch (error) {
-        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          localStorage.clear();
+        }
+        await showErrorAlert(error);
       }
     };
     fertchUserData();
@@ -41,6 +48,10 @@ export function Profile() {
   const handleSaveClick = () => {
     const updateDataUser = async () => {
       try {
+        let token = null;
+        if (typeof window !== 'undefined') {
+          token = localStorage.getItem('token');
+        }
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,7 +65,7 @@ export function Profile() {
         setIsEditing(false);
         Router.router?.reload;
       } catch (error) {
-        console.error(error);
+        await showErrorAlert(error);
       }
     };
     updateDataUser();

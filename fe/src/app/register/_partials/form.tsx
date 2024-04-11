@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { showErrorAlert } from '@/components/alert/alert';
 
 export function FormRegister() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export function FormRegister() {
       );
       router.push('/login');
     } catch (error) {
-      console.error('Error submitting form:', error);
+      await showErrorAlert(error);
     }
   };
 

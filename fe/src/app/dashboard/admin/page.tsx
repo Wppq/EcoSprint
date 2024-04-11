@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { History } from '../user/_partials/history';
 import { MdOutlineAccessTime } from 'react-icons/md';
 import { CgProfile, CgLogOut } from 'react-icons/cg';
 import { LiaDonateSolid } from 'react-icons/lia';
@@ -9,26 +8,28 @@ import { Transaction } from './_partials/transaction';
 import { Navbar } from '@/components/navbar/navbar';
 import { Profile } from '@/components/dashboard/profil';
 
-export function AdminDashboard() {
+export default function AdminDashboard() {
   const router = useRouter();
   const [activeMenu, setActiveMenu] = useState('');
 
   const renderContent = () => {
     switch (activeMenu) {
       case 'profile':
-        return <Profile />;
+        return <Profile/>;
       case 'history':
-        return <History />;
+        return <h1>History</h1>;
       case 'transaction':
-        return <Transaction />;
+        return <Transaction/>;
       default:
-        return <Profile />;
+        return <Profile/>;
     }
   };
 
   const logout = () => {
-    localStorage.clear();
-    router.push('/');
+    if (typeof window !== 'undefined') {
+      window.localStorage.clear();
+      router.push('/');
+    }
   };
 
   return (

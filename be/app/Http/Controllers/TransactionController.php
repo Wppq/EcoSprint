@@ -41,6 +41,9 @@ class TransactionController extends Controller
     public function create(Request $request)
     {
         try {
+            if ($request['auth_role'] != "user") {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
             $validator = Validator::make($request->json()->all(), [
                 'amount' => 'required|numeric|min:20000',
                 'payment_method' => 'required|string|in:BNI,BRI,BSI,gopay',
@@ -63,7 +66,6 @@ class TransactionController extends Controller
             ]);
             return response()->json(['message' => 'Successfully create transaction'], 201);
         } catch (\Throwable $th) {
-
             return response()->json(['message' => 'something make it happen'], 500);
         }
     }
@@ -124,6 +126,9 @@ class TransactionController extends Controller
     public function uploadProof(Request $request, string $id)
     {
         try {
+            if ($request['auth_role'] != "user") {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
             $validator = Validator::make($request->all(), [
                 'sender' => 'required|string|max:255',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -152,7 +157,6 @@ class TransactionController extends Controller
                 ], 200);
             }
         } catch (\Throwable $th) {
-            dd($th);
             return response()->json(['message' => 'something make it happen'], 500);
         }
     }

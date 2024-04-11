@@ -1,3 +1,4 @@
+import { showErrorAlert } from '@/components/alert/alert';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -34,7 +35,7 @@ export function PopupVolunteer({
           router.push('/dashboard');
         }
       } catch (error) {
-        console.error(error);
+        await showErrorAlert(error);
       }
     };
     updateDataUser();
