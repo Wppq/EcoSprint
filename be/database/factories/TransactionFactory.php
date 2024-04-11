@@ -28,7 +28,7 @@ class TransactionFactory extends Factory
             'payment_method' => $this->faker->randomElement(['BNI', 'BRI', 'BSI', 'GOPAY']),
             'status' => 'pending',
             'sender' => $this->faker->name,
-            'image_path' => $this->faker->imageUrl(),
+            'image_path' => null,
         ];
     }
 }
