@@ -40,7 +40,11 @@ export function Transaction() {
   }, []);
 
   const handlePaymentClick = (payment: Payment) => {
-    setSelectedPayment(payment);
+    if (payment.image_path != null) {
+      setSelectedPayment(payment);
+    } else {
+      setSelectedPayment(null);
+    }
   };
 
   const handleCloseImage = () => {
