@@ -11,7 +11,6 @@ class Transaction extends Model
     use HasFactory;
     protected $fillable = ['id', 'user_id', 'donation_id', 'amount', 'payment_method', 'status', 'sender', 'image_path'];
 
-    protected $primaryKey = 'id';
     protected static function boot()
     {
         parent::boot();

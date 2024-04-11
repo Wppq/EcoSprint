@@ -3,10 +3,10 @@
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\RankController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +34,11 @@ Route::group(['middleware' => 'cors'], function () {
         Route::post('/transaction/{id}', [TransactionController::class, 'uploadProof']);
 
     });
+
+    Route::get('/ranks', [RankController::class, 'index']);
+
     Route::get('/image/{image_path}', [ImageController::class, 'show']);
+
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/register', [UserController::class, 'register']);
 

@@ -10,8 +10,8 @@ const navLinks = [
         dataCyL: "solution-link"
     },
     {
-        text:'Our Works',
-        path: '/#our-works',
+        text:'Ranking',
+        path: '/#ranking',
         dataCyL: "our-works-link"
     }
 ]

@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Payment } from '@/models/payment';
+import Image from 'next/image';
 
 interface RankInterface {
   rank: number;
@@ -9,63 +11,12 @@ interface RankInterface {
 }
 
 export function Rank() {
-  const [ranks, setRanks] = useState<RankInterface[]>([
-    {
-      rank: 1,
-      name: 'sarwidad',
-      score: 100,
-    },
-    {
-      rank: 2,
-      name: 'ipeh',
-      score: 90,
-    },
-    {
-      rank: 3,
-      name: 'sarwidad',
-      score: 100,
-    },
-    {
-      rank: 4,
-      name: 'ipeh',
-      score: 90,
-    },
-    {
-      rank: 5,
-      name: 'ipeh',
-      score: 90,
-    },
-    {
-      rank: 6,
-      name: 'sarwidad',
-      score: 100,
-    },
-    {
-      rank: 7,
-      name: 'ipeh',
-      score: 90,
-    },
-    {
-      rank: 8,
-      name: 'sarwidad',
-      score: 100,
-    },
-    {
-      rank: 9,
-      name: 'ipeh',
-      score: 90,
-    },
-    {
-      rank: 10,
-      name: 'ipeh',
-      score: 90,
-    },
-  ]);
+  const [ranks, setRanks] = useState<RankInterface[]>([])
 
   useEffect(() => {
     const fetchRanks = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/rank');
+        const response = await axios.get('http://localhost:8000/api/ranks');
         setRanks(response.data);
       } catch (error) {
         console.error('Error fetching ranks:', error);
@@ -76,7 +27,7 @@ export function Rank() {
   }, []);
 
   return (
-    <div className='pb-20' >
+    <div className='pb-20 py-20' id='ranking'>
       <div className='text-center'>
         <h1 className="text-3xl font-bold mb-4 text-center">Rank</h1>
         <p>
@@ -95,9 +46,17 @@ export function Rank() {
           <tbody className="text-center">
             {ranks.map((rank, index) => (
               <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                <td className="border px-4 py-2">{rank.rank}</td>
+                <td className="border px-4 py-2">{index+1}</td>
                 <td className="border px-4 py-2 text-start flex">
-                  <div className="bg-red-300 rounded-full h-12 w-12"></div>
+                  <div className="bg-red-300 rounded-full h-12 w-12">
+                  <Image
+            className="w-12 h-12 rounded-full"
+            src={'http://localhost:8000/api/image/27470334_7309681.jpg'}
+            alt={rank.name}
+            width={200}
+            height={200}
+          />
+                  </div>
                   <p className="ml-4 mt-3">{rank.name}</p>
                 </td>
                 <td className="border px-4 py-2">{rank.score}</td>

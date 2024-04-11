@@ -45,5 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Donation::class);
     }
+    public function rank()
+    {
+        return $this->hasOne(Rank::class, 'user_id');
+    }
 }
 
